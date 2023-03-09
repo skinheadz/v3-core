@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.0 <0.8.0;
+pragma solidity >=0.4.0 <0.9.0;
 
 /// @title Contains 512-bit math functions
 /// @notice Facilitates multiplication and division that can have overflow of an intermediate value without any loss of precision
@@ -64,7 +64,7 @@ library FullMath {
         uint256 twos = -denominator & denominator;
         // Divide denominator by power of two
         assembly {
-            denominator := div(denominator, twos)
+            uint256 twos = denominator & (~denominator + 1)
         }
 
         // Divide [prod1 prod0] by the factors of two
